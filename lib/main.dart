@@ -6,6 +6,7 @@ import 'package:weather_task/core/app/weather_app.dart';
 import 'package:weather_task/features/weather/view/providers/weather_provider.dart';
 import 'core/di/dependency_injection.dart';
 
+/// Completed the technical task — thank you for the opportunity!🙏
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
