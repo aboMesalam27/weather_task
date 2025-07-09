@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_task/core/styles/app_colors.dart';
+import 'package:weather_task/core/utils/responsive_util.dart';
 import 'package:weather_task/core/values/values.dart';
 import 'package:weather_task/core/widgets/custom_image_view.dart';
 import 'package:weather_task/features/weather/data/models/weather_model.dart';
@@ -18,34 +19,55 @@ class WeatherCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(Values.baseAppRadius),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(
+          ResponsiveUtils.isMobile(context) ? 16 : 24,
+        ),
         child: Column(
           children: [
             Text(
               weather.location.name,
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge?.copyWith(color: Colors.white),
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.white,
+                fontSize: ResponsiveUtils.responsiveFontSize(
+                  context,
+                  mobile: 20,
+                  tablet: 24,
+                  desktop: 28,
+                ),
+              ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: ResponsiveUtils.responsiveHeight(context, 0.02)),
             CustomImageView(
-              imagePath:
-                  weather.current.condition.localIconPath ??
+              imagePath: weather.current.condition.localIconPath ??
                   weather.current.condition.icon,
-              width: 64,
-              height: 64,
+              width: ResponsiveUtils.isMobile(context) ? 64 : 96,
+              height: ResponsiveUtils.isMobile(context) ? 64 : 96,
             ),
+            SizedBox(height: ResponsiveUtils.responsiveHeight(context, 0.01)),
             Text(
               '${weather.current.temp_c}°C',
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge?.copyWith(color: Colors.white),
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.white,
+                fontSize: ResponsiveUtils.responsiveFontSize(
+                  context,
+                  mobile: 24,
+                  tablet: 32,
+                  desktop: 40,
+                ),
+              ),
             ),
+            SizedBox(height: ResponsiveUtils.responsiveHeight(context, 0.01)),
             Text(
               weather.current.condition.text,
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge?.copyWith(color: Colors.white),
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.white,
+                fontSize: ResponsiveUtils.responsiveFontSize(
+                  context,
+                  mobile: 16,
+                  tablet: 20,
+                  desktop: 24,
+                ),
+              ),
             ),
           ],
         ),

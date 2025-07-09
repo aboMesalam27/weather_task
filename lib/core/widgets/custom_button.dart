@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:weather_task/core/utils/responsive_util.dart';
 import '../styles/app_colors.dart';
 import '../values/values.dart';
 
@@ -24,7 +24,7 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 50,
+        height: ResponsiveUtils.isMobile(context) ? 50 : 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Values.baseAppRadius),
           color: buttonColor ?? primaryColor,
@@ -33,12 +33,19 @@ class CustomButton extends StatelessWidget {
           child: isLoading == true
               ? const CircularProgressIndicator(color: Colors.white)
               : child ??
-                    Text(
-                      text ?? "",
-                      style: Theme.of(context).textTheme.displaySmall
-                          ?.copyWith(color: whiteColor)
-                          .copyWith(fontSize: 20),
-                    ),
+              Text(
+                text ?? "",
+                style: Theme.of(context).textTheme.displaySmall
+                    ?.copyWith(color: whiteColor)
+                    .copyWith(
+                  fontSize: ResponsiveUtils.responsiveFontSize(
+                    context,
+                    mobile: 18,
+                    tablet: 20,
+                    desktop: 22,
+                  ),
+                ),
+              ),
         ),
       ),
     );
